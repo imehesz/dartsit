@@ -1,0 +1,80 @@
+script.
+    export let name = ""
+    let maxPoints = 301
+    let currentPoints = maxPoints
+    let winPoints = 0
+    let adjPts = 0
+
+    let setName = (e) => name = e.target.value
+
+    let setMax = (e) => {
+        maxPoints = e.target.value
+        currentPoints = maxPoints
+    }
+
+    let addPoints = () => {
+        currentPoints += Math.round(adjPts)
+        checkWin()
+    }
+
+    let substrPoints = () => {
+        if( currentPoints >= adjPts ) currentPoints -= Math.round(adjPts)
+        checkWin()
+    }
+
+    let changeAdjPts = (e) => adjPts = e.target.value
+
+    let checkWin = () => {
+        if (currentPoints == winPoints) alert(name.toUpperCase() + " won!")
+    }
+
+div.ppanel
+    fieldset
+
+        input(
+          "type"="text" 
+          "placeholder"="NAME"
+          on:keyup="{setName}"
+          value="{name}"
+        )
+
+        select(
+          on:change="{setMax}"
+        )
+            option 301
+            option 501
+            option 701
+
+        input(
+          "type"="number"
+          "placeholder"="ADJUST +/-"
+          "value"="0"
+          on:keyup="{changeAdjPts}"
+        )
+
+        button(
+          on:click="{addPoints}"    
+          "class"="btn"
+        ) +
+
+        button(
+          on:click="{substrPoints}"
+          "class"="btn"
+        ) -
+
+        h1 { currentPoints }
+
+    style.
+        fieldset {
+            border: 1px solid red;
+        }
+
+        .btn {
+            width: 100px;
+        }
+
+        .ppanel {
+            width: 25%;
+            overflow: hidden;
+            display: inline-block;
+        }
