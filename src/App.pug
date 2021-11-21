@@ -1,15 +1,30 @@
 script.
     import PlayerPanel from "./PlayerPanel.pug"
 
-    let playersArr = ["Player #1"]
+    let playersArr = []
+    let maxPoints = 301
 
     const addPlayer = () => {
         playersArr.push( "Player #" + (playersArr.length + 1))
         playersArr = playersArr
     }
 
+    let setMax = (e) => {
+        maxPoints = e.target.value
+        maxPoints = maxPoints
+    }
+
+
 main
     h1 Darts It!
+
+    span Game Type: 
+    select(
+      on:change="{setMax}"
+    )
+        option 301
+        option 501
+        option 701
 
     button(on:click="{addPlayer}") Add Player
 
@@ -18,6 +33,7 @@ main
     {#each playersArr as player}
       PlayerPanel(
           name="{player}"
+          maxPoints="{maxPoints}"
       )
 
 style.
