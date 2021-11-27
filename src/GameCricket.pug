@@ -1,0 +1,44 @@
+script.
+    let name = ""
+
+    let board = ["Bull", 20,19,18,17,16,15]
+    let results = {} 
+    
+    board.map((e) => results[e] = 0)
+
+div
+    h1 Cricket
+
+    
+    {#each board as row}
+      ul.board
+            li {row}
+                input(
+                    "type"="checkbox"
+                    "checked"="{results[row]==1 || results[row]==2 || results[row] == 3}"
+                )
+
+                input(
+                    "type"="checkbox"
+                    "checked"="{results[row]==2 || results[row] == 3}"
+                )
+
+                input(
+                    "type"="checkbox"
+                    "checked"="{results[row] == 3}"
+                )
+
+style.
+    input[type="checkbox"] {
+        width: 20px
+    }
+
+    ul.board {
+        list-style-type: none;
+        padding: 0; 
+        margin: 0; 
+    }
+
+    ul.board li {
+        height: 40px;
+    }

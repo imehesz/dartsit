@@ -1,7 +1,10 @@
 script.
+    import GameCricket from "./GameCricket.pug"
+
     export let name = ""
     export let maxPoints
 
+    let nodeRef
     let currentPoints = maxPoints
     let winPoints = 0
     let adjPts = 0
@@ -26,9 +29,14 @@ script.
         if (currentPoints == winPoints) alert(name.toUpperCase() + " won!")
     }
 
-div.ppanel
-    fieldset
+    let closeMe = () => {
+        let closeIt = confirm("Are you sure you want to remove this player?")
 
+        if (closeIt) nodeRef.parentNode.removeChild(nodeRef)
+    }
+
+div.ppanel("bind:this"={nodeRef})
+    fieldset
         input(
           "type"="text" 
           "placeholder"="NAME"
@@ -36,19 +44,30 @@ div.ppanel
           value="{name}"
         )
 
-        input(
-          "type"="number"
-          "placeholder"="ADJUST +/-"
-          "value"="{adjPts}"
-          on:keyup="{changeAdjPts}"
-        )
+        div(style="display:{maxPoints!='Cricket'?'block':'none'}")
+            
+
+            input(
+              "type"="number"
+              "placeholder"="ADJUST +/-"
+              "value"="{adjPts}"
+              on:keyup="{changeAdjPts}"
+            )
+
+            button(
+              on:click="{substrPoints}"
+              "class"="btn"
+            ) -
+
+            h1 { currentPoints }
+	
+        div(style="display:{maxPoints=='Cricket'?'block':'none'}")
+            GameCricket
 
         button(
-          on:click="{substrPoints}"
-          "class"="btn"
-        ) -
-
-        h1 { currentPoints }
+            on:click="{closeMe}"
+            class="btn"
+        ) X
 
 style.
     fieldset {
