@@ -1,8 +1,10 @@
 script.
     import GameCricket from "./GameCricket.pug"
+    import GameCricketLow from "./GameCricketLow.pug"
+    import GameRoundhouse from "./GameRoundhouse.pug"
 
     export let name = ""
-    export let maxPoints
+    export let maxPoints = ""
 
     let nodeRef
     let currentPoints = maxPoints
@@ -35,6 +37,8 @@ script.
         if (closeIt) nodeRef.parentNode.removeChild(nodeRef)
     }
 
+    let isCalcNeeded = () => maxPoints.indexOf("Cricket")<0 && maxPoints != "Roundhouse"
+
 div.ppanel("bind:this"={nodeRef})
     fieldset
         input(
@@ -44,9 +48,7 @@ div.ppanel("bind:this"={nodeRef})
           value="{name}"
         )
 
-        div(style="display:{maxPoints!='Cricket'?'block':'none'}")
-            
-
+        div(style="display:{isCalcNeeded()?'block':'none'}")
             input(
               "type"="number"
               "placeholder"="ADJUST +/-"
@@ -64,9 +66,15 @@ div.ppanel("bind:this"={nodeRef})
         div(style="display:{maxPoints=='Cricket'?'block':'none'}")
             GameCricket
 
+        div(style="display:{maxPoints=='Cricket Low'?'block':'none'}")
+            GameCricketLow
+
+        div(style="display:{maxPoints=='Roundhouse'?'block':'none'}")
+            GameRoundhouse
+
         button(
             on:click="{closeMe}"
-            class="btn"
+            class="btn btn__del"
         ) X
 
 style.
@@ -76,6 +84,11 @@ style.
 
     .btn {
         width: 100px;
+    }
+
+    .btn__del {
+        background-color: #f00;
+        color: #fff;
     }
 
     .ppanel {

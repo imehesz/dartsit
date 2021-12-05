@@ -2,7 +2,7 @@ script.
     import PlayerPanel from "./PlayerPanel.pug"
 
     let playersArr = []
-    let maxPoints = 301
+    let maxPoints = 0
 
     const addPlayer = () => {
         playersArr.push( "Player #" + (playersArr.length + 1))
@@ -16,18 +16,25 @@ script.
 
 
 main
-    h1 Darts It!
+    h2 Darts It! 
+        small v.0.4
+    h1(style="display:{maxPoints != 0 ? 'block' : 'none'}") Play: {maxPoints}
 
-    span Game Type: 
     select(
       on:change="{setMax}"
+      disabled={playersArr.length!=0}
     )
+        option(value="0") Select Game Type
+        option(value="---", disabled="true") ---
         option 301
         option 501
         option 701
+        option(value="---", disabled="true") ---
         option Cricket
+        option Cricket Low
+        option Roundhouse
 
-    button(on:click="{addPlayer}") Add Player
+    button(on:click="{addPlayer}",disabled="{maxPoints==0}") Add Player
 
     div
 
@@ -49,6 +56,20 @@ style.
         text-transform: uppercase;
         font-size: 4em;
         font-weight: 100;
+        margin-top: 0;
+    }
+
+    h2 {
+        color: #aaa;
+        font-weight: 100;
+    }
+
+    h2 small {
+        font-size: 0.5em;
+    }
+
+    button {
+        margin-left: 10px;
     }
 
     @media (min-width: 640px) {
