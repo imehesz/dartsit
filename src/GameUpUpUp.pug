@@ -1,0 +1,41 @@
+script.
+    let name = Date.now()
+
+    let board = 9
+    let results = {} 
+    let sum=0
+
+    let scoreTblId= "score-tbl-" + name
+
+    const updateSum = (e) => {
+        sum = 0
+
+        let scoreTbl = document.getElementById(scoreTblId)
+        let roundScores = scoreTbl.querySelectorAll(".round-score")
+
+        roundScores.forEach(e => sum += parseInt(e.value))
+    }
+    
+div
+    ul(id="score-tbl-{name}")
+        {#each Array(board) as _, i}
+          li
+                input(type="number",class="round-score",value="0",on:blur="{updateSum}")
+
+        h2 {sum}
+
+style.
+    input[type="number"] {
+        width: 100px;
+        display: block;
+    }
+
+    ul.board {
+        list-style-type: none;
+        padding: 0; 
+        margin: 0; 
+    }
+
+    ul.board li {
+        height: 40px;
+    }
