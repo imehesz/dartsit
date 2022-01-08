@@ -25,7 +25,7 @@ main
     header(style="display:{rolledUp?'none':'block'}")
         img(src="https://i.imgur.com/ikcp7y8.png" alt="dart board")
         h2 Darts It! 
-            small v.0.7
+            small v.0.72
         h1(style="display:{maxPoints != 0 ? 'block' : 'none'}") Play: {maxPoints}
 
         select(
@@ -48,6 +48,10 @@ main
             option(value="rhouse_odd") Roundhouse - Odd
             option(value="---", disabled="true") ---
             option(value="up") Up Up Up!
+            option(value="---", disabled="true") ---
+            option(value="bull_slayer_5") Bull Slayer 5
+            option(value="bull_slayer_10") Bull Slayer 10
+            option(value="bull_slayer_20") Bull Slayer 20
 
         button(on:click="{addPlayer}",disabled="{maxPoints==0}") Add Player
 

@@ -2,6 +2,7 @@ script.
     import GameCricket from "./GameCricket.pug"
     import GameRoundhouse from "./GameRoundhouse.pug"
     import GameUpUpUp from "./GameUpUpUp.pug"
+    import GameBullSlayer from "./GameBullSlayer.pug"
 
     export let name = ""
     export let maxPoints = ""
@@ -37,7 +38,13 @@ script.
         if (closeIt) nodeRef.parentNode.removeChild(nodeRef)
     }
 
-    let isCalcNeeded = () => maxPoints.indexOf("cricket") == -1 && maxPoints.indexOf("rhouse") == -1 && maxPoints != "up"
+    let isCalcNeeded = () => {
+        return 
+            maxPoints.indexOf("cricket") == -1 && 
+            maxPoints.indexOf("rhouse") == -1 && 
+            maxPoints.indexOf("bull_slayer") == -1 && 
+            maxPoints != "up"
+    }
 
 div.ppanel("bind:this"={nodeRef})
     fieldset
@@ -87,6 +94,15 @@ div.ppanel("bind:this"={nodeRef})
         div(style="display:{maxPoints=='up'?'block':'none'}")
             GameUpUpUp
 
+        div(style="display:{maxPoints=='bull_slayer_5'?'block':'none'}")
+            GameBullSlayer(bulls={5})
+
+        div(style="display:{maxPoints=='bull_slayer_10'?'block':'none'}")
+            GameBullSlayer(bulls={10})
+
+        div(style="display:{maxPoints=='bull_slayer_20'?'block':'none'}")
+            GameBullSlayer(bulls={20})
+
         button(
             on:click="{closeMe}"
             class="btn btn__del"
@@ -95,6 +111,10 @@ div.ppanel("bind:this"={nodeRef})
 style.
     fieldset {
         border: 1px solid gray;
+    }
+
+    input[type="text"] {
+        text-align: center;
     }
 
     input[type="number"] {
