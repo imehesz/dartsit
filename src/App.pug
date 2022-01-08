@@ -17,7 +17,7 @@ script.
 
 main
     h2 Darts It! 
-        small v.0.5
+        small v.0.6
     h1(style="display:{maxPoints != 0 ? 'block' : 'none'}") Play: {maxPoints}
 
     select(
@@ -32,7 +32,9 @@ main
         option(value="---", disabled="true") ---
         option Cricket
         option Cricket Low
-        option Roundhouse
+        option(value="rhouse") Roundhouse
+        option(value="rhouse_even") Roundhouse - Even
+        option(value="rhouse_odd") Roundhouse - Odd
         option(value="up") Up Up Up!
 
     button(on:click="{addPlayer}",disabled="{maxPoints==0}") Add Player

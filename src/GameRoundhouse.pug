@@ -1,17 +1,22 @@
 script.
     let name = ""
 
-    let board = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,"Bull"]
+    export let board = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,"Bull"]
     let results = {} 
     
 
 div
-    {#each board as row}
-      ul.board
-            li {row}
-                input(
-                    "type"="checkbox"
-                )
+
+    ul.board
+        {#each board as row}
+          li {row}
+            input(
+                "type"="checkbox"
+            )
+        li Bull
+          input(
+            "type"="checkbox"
+          )
 
 style.
     input[type="checkbox"] {
@@ -22,8 +27,11 @@ style.
         list-style-type: none;
         padding: 0; 
         margin: 0; 
+        display: flex;
+        flex-wrap: wrap;
     }
 
     ul.board li {
         height: 40px;
+        flex: 1 50%;
     }
