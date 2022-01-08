@@ -1,6 +1,5 @@
 script.
     import GameCricket from "./GameCricket.pug"
-    import GameCricketLow from "./GameCricketLow.pug"
     import GameRoundhouse from "./GameRoundhouse.pug"
     import GameUpUpUp from "./GameUpUpUp.pug"
 
@@ -38,7 +37,7 @@ script.
         if (closeIt) nodeRef.parentNode.removeChild(nodeRef)
     }
 
-    let isCalcNeeded = () => maxPoints.indexOf("Cricket")<0 && maxPoints.indexOf("rhouse") == -1 && maxPoints != "up"
+    let isCalcNeeded = () => maxPoints.indexOf("cricket") == -1 && maxPoints.indexOf("rhouse") == -1 && maxPoints != "up"
 
 div.ppanel("bind:this"={nodeRef})
     fieldset
@@ -64,12 +63,18 @@ div.ppanel("bind:this"={nodeRef})
 
             h1 { currentPoints }
 	
-        div(style="display:{maxPoints=='Cricket'?'block':'none'}")
-            GameCricket
+        div(style="display:{maxPoints=='cricket'?'block':'none'}")
+            GameCricket(board={[20,19,18,17,16,15]})
 
-        div(style="display:{maxPoints=='Cricket Low'?'block':'none'}")
-            GameCricketLow
+        div(style="display:{maxPoints=='cricket_1-5'?'block':'none'}")
+            GameCricket(board={[1,2,3,4,5]})
 
+        div(style="display:{maxPoints=='cricket_5-10'?'block':'none'}")
+            GameCricket(board={[5,6,7,8,9,10]})
+
+        div(style="display:{maxPoints=='cricket_10-15'?'block':'none'}")
+            GameCricket(board={[10,11,12,13,14,15]})
+                
         div(style="display:{maxPoints=='rhouse'?'block':'none'}")
             GameRoundhouse(board={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]})
 

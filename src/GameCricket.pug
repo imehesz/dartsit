@@ -1,29 +1,33 @@
 script.
     let name = ""
 
-    let board = ["Bull", 20,19,18,17,16,15]
+    export let board = [20,19,18,17,16,15]
     let results = {} 
     
     board.map((e) => results[e] = 0)
 
 div
-    {#each board as row}
-      ul.board
-            li {row}
-                input(
-                    "type"="checkbox"
-                    "checked"="{results[row]==1 || results[row]==2 || results[row] == 3}"
-                )
+    ul.board
+      li Bull
+        input("type"="checkbox")
+        input("type"="checkbox")
+        input("type"="checkbox")
+      {#each board as row}
+        li {row}
+            input(
+                "type"="checkbox"
+                "checked"="{results[row]==1 || results[row]==2 || results[row] == 3}"
+            )
 
-                input(
-                    "type"="checkbox"
-                    "checked"="{results[row]==2 || results[row] == 3}"
-                )
+            input(
+                "type"="checkbox"
+                "checked"="{results[row]==2 || results[row] == 3}"
+            )
 
-                input(
-                    "type"="checkbox"
-                    "checked"="{results[row] == 3}"
-                )
+            input(
+                "type"="checkbox"
+                "checked"="{results[row] == 3}"
+            )
 
 style.
     input[type="checkbox"] {

@@ -3,10 +3,16 @@ script.
 
     let playersArr = []
     let maxPoints = 0
+    let rolledUp = true
 
     const addPlayer = () => {
         playersArr.push( "Player #" + (playersArr.length + 1))
         playersArr = playersArr
+    }
+
+    const toggleHeader = () => {
+        rolledUp = !rolledUp
+        rolledUp = rolledUp
     }
 
     let setMax = (e) => {
@@ -16,28 +22,39 @@ script.
 
 
 main
-    h2 Darts It! 
-        small v.0.6
-    h1(style="display:{maxPoints != 0 ? 'block' : 'none'}") Play: {maxPoints}
+    header(style="display:{rolledUp?'none':'block'}")
+        img(src="https://i.imgur.com/ikcp7y8.png" alt="dart board")
+        h2 Darts It! 
+            small v.0.7
+        h1(style="display:{maxPoints != 0 ? 'block' : 'none'}") Play: {maxPoints}
 
-    select(
-      on:change="{setMax}"
-      disabled={playersArr.length!=0}
-    )
-        option(value="0") Select Game Type
-        option(value="---", disabled="true") ---
-        option 301
-        option 501
-        option 701
-        option(value="---", disabled="true") ---
-        option Cricket
-        option Cricket Low
-        option(value="rhouse") Roundhouse
-        option(value="rhouse_even") Roundhouse - Even
-        option(value="rhouse_odd") Roundhouse - Odd
-        option(value="up") Up Up Up!
+        select(
+          on:change="{setMax}"
+          disabled={playersArr.length!=0}
+        )
+            option(value="0") Select Game Type
+            option(value="---", disabled="true") ---
+            option 301
+            option 501
+            option 701
+            option(value="---", disabled="true") ---
+            option(value="cricket") Cricket
+            option(value="cricket_1-5") Cricket 1-5
+            option(value="cricket_5-10") Cricket 5-10
+            option(value="cricket_10-15") Cricket 10-15
+            option(value="---", disabled="true") ---
+            option(value="rhouse") Roundhouse
+            option(value="rhouse_even") Roundhouse - Even
+            option(value="rhouse_odd") Roundhouse - Odd
+            option(value="---", disabled="true") ---
+            option(value="up") Up Up Up!
 
-    button(on:click="{addPlayer}",disabled="{maxPoints==0}") Add Player
+        button(on:click="{addPlayer}",disabled="{maxPoints==0}") Add Player
+
+    div(class="action-wrapper" on:click="{toggleHeader}")
+        small(class="action action__rollup" style="display:{!rolledUp ? 'block' : 'none'}" ) ▲
+        small(class="action action__rolldown" style="display:{rolledUp ? 'block' : 'none'}" ) ▼
+        hr
 
     div
 
@@ -62,9 +79,14 @@ style.
         margin-top: 0;
     }
 
-    h2 {
+    h2, .action {
         color: #aaa;
         font-weight: 100;
+    }
+
+    .action-wrapper {
+        font-size: 20px;
+        cursor: pointer;
     }
 
     h2 small {
