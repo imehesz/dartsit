@@ -3,6 +3,7 @@ script.
     import GameRoundhouse from "./GameRoundhouse.pug"
     import GameUpUpUp from "./GameUpUpUp.pug"
     import GameBullSlayer from "./GameBullSlayer.pug"
+    import GameDown from "./GameDown.pug"
 
     export let name = ""
     export let maxPoints = ""
@@ -55,21 +56,16 @@ div.ppanel("bind:this"={nodeRef})
           value="{name}"
         )
 
-        div(style="display:{isCalcNeeded()?'block':'none'}")
-            input(
-              "type"="number"
-              "placeholder"="ADJUST +/-"
-              "value"="{adjPts}"
-              on:keyup="{changeAdjPts}"
-            )
 
-            button(
-              on:click="{substrPoints}"
-              "class"="btn btn__action"
-            ) -
+        div(style="display:{maxPoints=='301'?'block':'none'}")
+            GameDown(maxPoint={301})
 
-            h1 { currentPoints }
-	
+        div(style="display:{maxPoints=='501'?'block':'none'}")
+            GameDown(maxPoint={501})
+
+        div(style="display:{maxPoints=='701'?'block':'none'}")
+            GameDown(maxPoint={701})
+
         div(style="display:{maxPoints=='cricket'?'block':'none'}")
             GameCricket(board={[20,19,18,17,16,15]})
 

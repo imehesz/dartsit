@@ -1,0 +1,57 @@
+script.
+    export let maxPoint = 0
+    let name = Date.now()
+    let sum=maxPoint
+    let score=0
+
+    let scoreTblId= "score-tbl-" + name
+
+    const updateSum = (e) => {
+        if(score > sum) return
+
+        sum -= score
+
+        if(sum < 0) sum = 0
+
+        sum = sum
+
+        score = 0
+        score = score
+    }
+
+    const setScore = (e) => {
+        score = e.target.value
+    }
+    
+div
+    h1 {sum}
+
+    div.action-row
+        input(
+          type="number", 
+          value={score}
+          on:keyup={setScore})
+
+        button(on:click={updateSum}) -
+
+style.
+    .action-row {
+        display: flex;
+        margin-bottom: 100px;
+    }
+
+    .action-row input, 
+    .action-row button {
+        flex-grow: 1;
+    }
+
+
+    .action-row input {
+        margin-right: 10px;
+    }
+
+    .action-row button {
+        background-color: green;
+        color: #fff;
+        font-weight: bolder;
+    }
