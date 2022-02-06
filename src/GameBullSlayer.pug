@@ -1,11 +1,30 @@
 script.
     export let bulls = 5
 
+    let name = Date.now() + "" + Math.random(Date.now())
+    let changed = false
+
+    const setChanged = () => changed = true
+
+    PubSub.subscribe("resetPanels", () => {
+        let scoreBoard = document.getElementById("board-" + name)
+
+        if(changed) {
+            let roundScores = scoreBoard.querySelectorAll("input")
+            roundScores.forEach((e) => e.checked = false)
+            changed = false
+        }
+    })
+
+
 div
-    ul.board
+    ul(id="board-{name}", class="board")
       {#each [...Array(bulls).keys()] as row}
         li Bull \#{row+1}.
-          input("type"="checkbox")
+          input(
+            "type"="checkbox"
+            "on:click"="{setChanged}"
+          )
 
 style.
     input[type="checkbox"] {

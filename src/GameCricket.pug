@@ -5,10 +5,7 @@ script.
     let results = {} 
     let changed = false
     
-    const setChanged = () => {
-        changed = true
-        changed = changed
-    }
+    const setChanged = () => changed = true
 
     PubSub.subscribe("resetPanels", () => {
         let scoreBoard = document.getElementById("board-" + name)

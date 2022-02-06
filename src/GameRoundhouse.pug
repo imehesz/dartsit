@@ -1,21 +1,35 @@
 script.
-    let name = ""
+    let name = Date.now() + "" + Math.random(Date.now())
 
     export let board = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,"Bull"]
     let results = {} 
-    
+    let changed = false
+
+    const setChanged = () => changed = true
+
+    PubSub.subscribe("resetPanels", () => {
+        let scoreBoard = document.getElementById("board-" + name)
+
+        if(changed) {
+            let roundScores = scoreBoard.querySelectorAll("input")
+            roundScores.forEach((e) => e.checked = false)
+            changed = false
+        }
+    })
 
 div
 
-    ul.board
+    ul(id="board-{name}", class="board")
         {#each board as row}
           li {row}
             input(
                 "type"="checkbox"
+                "on:click"={setChanged}
             )
         li Bull
           input(
             "type"="checkbox"
+            "on:click"={setChanged}
           )
 
 style.
