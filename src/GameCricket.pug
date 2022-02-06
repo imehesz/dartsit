@@ -1,13 +1,27 @@
 script.
-    let name = ""
+    export let board = []
 
-    export let board = [20,19,18,17,16,15]
+    let name = Date.now() + "" + Math.random(Date.now())
     let results = {} 
+    let changed = false
     
-    board.map((e) => results[e] = 0)
+    const setChanged = () => {
+        changed = true
+        changed = changed
+    }
+
+    PubSub.subscribe("resetPanels", () => {
+        let scoreBoard = document.getElementById("board-" + name)
+
+        if(changed) {
+            let roundScores = scoreBoard.querySelectorAll("input")
+            roundScores.forEach((e) => e.checked = false)
+            changed = false
+        }
+    })
 
 div
-    ul.board
+    ul(id="board-{name}", class="board")
       li Bull
         input("type"="checkbox")
         input("type"="checkbox")
@@ -16,17 +30,17 @@ div
         li {row}
             input(
                 "type"="checkbox"
-                "checked"="{results[row]==1 || results[row]==2 || results[row] == 3}"
+                "on:click"={setChanged}
             )
 
             input(
                 "type"="checkbox"
-                "checked"="{results[row]==2 || results[row] == 3}"
+                "on:click"={setChanged}
             )
 
             input(
                 "type"="checkbox"
-                "checked"="{results[row] == 3}"
+                "on:click"={setChanged}
             )
 
 style.
