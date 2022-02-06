@@ -15,6 +15,18 @@ script.
 
         roundScores.forEach(e => sum += parseInt(e.value))
     }
+
+    PubSub.subscribe("resetPanels", () => {
+        if (sum > 0) {
+            let scoreTbl = document.getElementById(scoreTblId)
+            let roundScores = scoreTbl.querySelectorAll(".round-score")
+
+            roundScores.forEach(e => e.value = 0)
+
+            sum = 0
+            sum = sum
+        }
+    })
     
 div
     ul(id="score-tbl-{name}")

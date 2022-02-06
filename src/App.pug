@@ -20,12 +20,17 @@ script.
         maxPoints = maxPoints
     }
 
+    let resetPlayerPanels = (e) => {
+        let c =  confirm("Are you sure you want to reset the player boards?") 
+        if(c) PubSub.publish("resetPanels")
+    }
+
 
 main
     header(style="display:{rolledUp?'none':'block'}")
         img(src="https://i.imgur.com/ikcp7y8.png" alt="dart board")
         h2 Darts It! 
-            small v.0.80
+            small v.0.81
         h1(style="display:{maxPoints != 0 ? 'block' : 'none'}") Play: {maxPoints}
 
         select(
@@ -54,6 +59,7 @@ main
             option(value="bull_slayer_20") Bull Slayer 20
 
         button(on:click="{addPlayer}",disabled="{maxPoints==0}") Add Player
+        button(on:click="{resetPlayerPanels}",disabled="{playersArr.length==0}") Reset
 
     div(class="action-wrapper" on:click="{toggleHeader}")
         small(class="action action__rollup" style="display:{!rolledUp ? 'block' : 'none'}" ) ▲

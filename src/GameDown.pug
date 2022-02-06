@@ -1,5 +1,6 @@
 script.
     export let maxPoint = 0
+    
     let name = Date.now()
     let sum=maxPoint
     let score=0
@@ -22,6 +23,13 @@ script.
     const setScore = (e) => {
         score = e.target.value
     }
+
+    PubSub.subscribe("resetPanels", () => {
+        if (sum != maxPoint) {
+            sum = maxPoint
+            sum = sum
+        }
+    })
     
 div
     h1 {sum}
