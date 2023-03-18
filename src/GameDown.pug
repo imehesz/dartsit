@@ -4,6 +4,9 @@ script.
     let name = Date.now()
     let sum=maxPoint
     let score=0
+    let round = 1
+    let realSum = 0
+    let gamerAverage = 0
 
     let scoreTblId= "score-tbl-" + name
 
@@ -16,13 +19,23 @@ script.
 
         sum = sum
 
+        round += 1
+        realSum += parseInt(score)
+
         score = 0
-        score = score
+        score = parseInt(score)
+    }
+
+    const setGamerAverage = () => {
+        gamerAverage = round > 1 ? realSum/(round-1) : 0
+        gamerAverage = parseFloat(gamerAverage).toFixed(1)
     }
 
     const setScore = (e) => {
         if (e.key == "Enter") updateSum(e)
         else score = e.target.value
+
+        setGamerAverage()
     }
 
     PubSub.subscribe("resetPanels", () => {
@@ -33,7 +46,9 @@ script.
     })
     
 div
-    h1 {sum}
+    .info
+        h1 {sum}
+        sup(title="Round #/Avg. Score") {round}/{gamerAverage}
 
     div.action-row
         input(
@@ -63,4 +78,15 @@ style.
         background-color: green;
         color: #fff;
         font-weight: bolder;
+    }
+
+    .info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .info sup {
+        margin-left: 5px;
     }
