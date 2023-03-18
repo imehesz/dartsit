@@ -21,7 +21,8 @@ script.
     }
 
     const setScore = (e) => {
-        score = e.target.value
+        if (e.key == "Enter") updateSum(e)
+        else score = e.target.value
     }
 
     PubSub.subscribe("resetPanels", () => {
