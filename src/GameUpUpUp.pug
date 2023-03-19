@@ -5,6 +5,9 @@ script.
     let results = {} 
     let sum=0
 
+    let round = 0
+    let gamerAverage = 0
+
     let scoreTblId= "score-tbl-" + name
 
     const updateSum = (e) => {
@@ -14,6 +17,17 @@ script.
         let roundScores = scoreTbl.querySelectorAll(".round-score")
 
         roundScores.forEach(e => sum += parseInt(e.value))
+
+        // round if value > 0 (yes, it will ignore 0 point rounds for now)
+        round = 0
+        roundScores.forEach(e => round = e.value > 0 ? round + 1 : round)
+
+        setGamerAverage()
+    }
+
+    const setGamerAverage = () => {
+        gamerAverage = round > 0 ? sum/(round) : 0
+        gamerAverage = parseFloat(gamerAverage).toFixed(1)
     }
 
     PubSub.subscribe("resetPanels", () => {
@@ -25,6 +39,12 @@ script.
 
             sum = 0
             sum = sum
+
+            round = 0
+            round = round 
+
+            gamerAverage = 0
+            gamerAverage = gamerAverage 
         }
     })
     
@@ -34,7 +54,9 @@ div
           li
                 input(type="number",class="round-score",value="0",on:blur="{updateSum}")
 
-    h2 {sum}
+    .info
+        h2 {sum}
+        sup(title="Avg. Score") {gamerAverage}
 
 style.
     input[type="number"] {
@@ -50,4 +72,15 @@ style.
 
     ul.board li {
         height: 40px;
+    }
+    
+    .info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .info sup {
+        margin-left: 5px;
     }
