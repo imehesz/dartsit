@@ -30,7 +30,7 @@ main
     header(style="display:{rolledUp?'none':'block'}")
         img(src="https://i.imgur.com/ikcp7y8.png" alt="dart board")
         h2 Darts It! 
-            small v.0.86
+            small v.0.90
         h1(style="display:{maxPoints != 0 ? 'block' : 'none'}") Play: {maxPoints}
 
         select(
@@ -47,6 +47,10 @@ main
             option(value="cricket_1-5") Cricket 1-5
             option(value="cricket_5-10") Cricket 5-10
             option(value="cricket_10-15") Cricket 10-15
+            option(value="cricket_heaven") Cricket Heaven
+            option(value="cricket_hell") Cricket Hell
+            option(value="cricket_dark") Cricket Dark
+            option(value="cricket_light") Cricket Light
             option(value="---", disabled="true") ---
             option(value="rhouse") Roundhouse
             option(value="rhouse_even") Roundhouse - Even
@@ -57,6 +61,7 @@ main
             option(value="bull_slayer_5") Bull Slayer 5
             option(value="bull_slayer_10") Bull Slayer 10
             option(value="bull_slayer_20") Bull Slayer 20
+
 
         button(on:click="{addPlayer}",disabled="{maxPoints==0}") Add Player
         button(on:click="{resetPlayerPanels}",disabled="{playersArr.length==0}") Reset
